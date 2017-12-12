@@ -1,3 +1,16 @@
+##
+# User represents a single user.
+#
+# Users have the following attributes:
+# - personal info (name, nickname, image, email)
+# - sign-in info (password, encrypted password)
+# - log-in and reset details (sign-in counts and timings, reset token information)
+# - location (latitude, longitude, location)
+#
+# Users posses many Skills (through the users_skills join table), many
+# received jobs and many fixed jobs. Both of the latter are represented
+# by Jobs.
+
 class User < ActiveRecord::Base
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
@@ -16,6 +29,9 @@ class User < ActiveRecord::Base
     self.uid = SecureRandom.uuid
     skip_confirmation!
   end
+
+  ##
+  # Returns user's email address
 
   def mailboxer_email(object)
    email
